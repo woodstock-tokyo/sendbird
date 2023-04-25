@@ -16,7 +16,7 @@ This library provides wrapper functions for Sendbird Platform API written in Gol
 
 ## Installation
 
-To install SendbirdClient for Golang, please execute the following `go get` command.
+To install sendbird for Golang, please execute the following `go get` command.
 
 ```bash
     go get github.com/woodstock-tokyo/sendbird
@@ -32,7 +32,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	sendbirdclient "sendbird"
+	"github.com/woodstock-tokyo/sendbird"
 )
 
 const (
@@ -49,10 +49,10 @@ var (
 func main() {
 	flag.Parse()
 
-	testClient, err := sendbirdclient.NewClient(sendbirdclient.WithAPIKey(*apiKey))
+	testClient, err := sendbird.NewClient(sendbird.WithAPIKey(*apiKey))
 	check(err)
 
-	user, err := testClient.CreateAUserWithURL(&sendbirdclient.CreateAUserWithURLRequest{
+	user, err := testClient.CreateAUserWithURL(&sendbird.CreateAUserWithURLRequest{
 		UserID:   *userID,
 		NickName: *nickName,
 		IssueAccessToken: IssueAccessToken,

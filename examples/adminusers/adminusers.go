@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	sendbirdclient "github.com/woodstock-tokyo/sendbird"
+	"github.com/woodstock-tokyo/sendbird"
 )
 
 const (
@@ -29,10 +29,10 @@ var (
 func main() {
 	flag.Parse()
 
-	testClient, err := sendbirdclient.NewClient(sendbirdclient.WithAPIKey(*apiKey))
+	testClient, err := sendbird.NewClient(sendbird.WithAPIKey(*apiKey))
 	check(err)
 
-	user, err := testClient.CreateAUserWithURL(&sendbirdclient.CreateAUserWithURLRequest{
+	user, err := testClient.CreateAUserWithURL(&sendbird.CreateAUserWithURLRequest{
 		UserID:   *userID,
 		NickName: *nickName,
 		//ProfileURL:       *profileURL,
@@ -44,7 +44,7 @@ func main() {
 	meta := make(map[string]string)
 	meta[UserRoleMetaKey] = UserRoleMetaValue
 
-	returnMeta, err := testClient.CreateAnUserMetaData(user.UserID, &sendbirdclient.CreateAnUserMetaDataRequest{
+	returnMeta, err := testClient.CreateAnUserMetaData(user.UserID, &sendbird.CreateAnUserMetaDataRequest{
 		MetaData: meta,
 	})
 	check(err)
@@ -52,7 +52,7 @@ func main() {
 
 	chName := fmt.Sprintf("Channel_%s", user.UserID)
 
-	groupCh, err := testClient.CreateAGroupChannelWithURL(&sendbirdclient.CreateAGroupChannelWithURLRequest{
+	groupCh, err := testClient.CreateAGroupChannelWithURL(&sendbird.CreateAGroupChannelWithURLRequest{
 		Name:       chName,
 		UserIDs:    []string{user.UserID},
 		CustomType: InitCustomType,
@@ -64,7 +64,7 @@ func main() {
 	chMeta := make(map[string]string)
 	chMeta[ChannelStatusMetaKey] = ChannelStatusMetaValue
 
-	returnChMeta, err := testClient.CreateAChannelMetadata(GroupChannelType, groupCh.ChannelURL, &sendbirdclient.CreateAChannelMetadataRequest{
+	returnChMeta, err := testClient.CreateAChannelMetadata(GroupChannelType, groupCh.ChannelURL, &sendbird.CreateAChannelMetadataRequest{
 		Metadata: chMeta,
 	})
 	check(err)

@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	sendbirdclient "github.com/woodstock-tokyo/sendbird"
+	"github.com/woodstock-tokyo/sendbird"
 )
 
 const (
@@ -27,10 +27,10 @@ var (
 func main() {
 	flag.Parse()
 
-	testClient, err := sendbirdclient.NewClient(sendbirdclient.WithAPIKey(*apiKey))
+	testClient, err := sendbird.NewClient(sendbird.WithAPIKey(*apiKey))
 	check(err)
 
-	user, err := testClient.CreateAUserWithURL(&sendbirdclient.CreateAUserWithURLRequest{
+	user, err := testClient.CreateAUserWithURL(&sendbird.CreateAUserWithURLRequest{
 		UserID:   *userID,
 		NickName: *nickName,
 		//ProfileURL:       *profileURL,
@@ -42,18 +42,18 @@ func main() {
 	meta := make(map[string]string)
 	meta[UserRoleMetaKey] = UserRoleMetaValue
 
-	returnMeta, err := testClient.CreateAnUserMetaData(user.UserID, &sendbirdclient.CreateAnUserMetaDataRequest{
+	returnMeta, err := testClient.CreateAnUserMetaData(user.UserID, &sendbird.CreateAnUserMetaDataRequest{
 		MetaData: meta,
 	})
 	check(err)
 	fmt.Printf("Usermeta: %+v \n", returnMeta)
 
-	chResp, err := testClient.ListMyGroupChannels(user.UserID, &sendbirdclient.ListMyGroupChannelsRequest{})
+	chResp, err := testClient.ListMyGroupChannels(user.UserID, &sendbird.ListMyGroupChannelsRequest{})
 	check(err)
 	fmt.Printf("Length of user's groupChannels: %d \n", len(chResp.Channels))
 
 	if len(chResp.Channels) == 0 {
-		groupChResp, err := testClient.ListGroupChannels(&sendbirdclient.ListGroupChannelsRequest{
+		groupChResp, err := testClient.ListGroupChannels(&sendbird.ListGroupChannelsRequest{
 			CustomType: IdleCustomType,
 		})
 		check(err)
@@ -62,12 +62,12 @@ func main() {
 		if len(groupChResp.Channels) > 0 {
 			targetCh := groupChResp.Channels[0]
 
-			targetCh, err = testClient.UpdateAGroupChannel(targetCh.ChannelURL, &sendbirdclient.UpdateAGroupChannelRequest{
+			targetCh, err = testClient.UpdateAGroupChannel(targetCh.ChannelURL, &sendbird.UpdateAGroupChannelRequest{
 				CustomType: OccupiedCustomType,
 			})
 			check(err)
 
-			targetCh, err := testClient.InviteMembersToGroupChannel(targetCh.ChannelURL, &sendbirdclient.InviteMembersToGroupChannelRequest{
+			targetCh, err := testClient.InviteMembersToGroupChannel(targetCh.ChannelURL, &sendbird.InviteMembersToGroupChannelRequest{
 				UserIDs: []string{user.UserID},
 			})
 			check(err)
