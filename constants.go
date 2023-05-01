@@ -23,6 +23,9 @@ const (
 
 	//Group Channels
 	SendbirdURLGroupChannels = `/group_channels`
+
+	//Bot Channels
+	SendbirdURLBots = `/bots`
 )
 
 // Sendbird token type for push service

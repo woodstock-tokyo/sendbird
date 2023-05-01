@@ -14,16 +14,18 @@ type channelMetaTemplateData struct {
 }
 
 func (c *Client) CreateAChannelMetadata(channelType string, channelURL string, r *CreateAChannelMetadataRequest) (map[string]string, error) {
+	result := make(map[string]string)
+
 	pathString, err := templates.GetChannelMetadataTemplate(channelMetaTemplateData{
 		ChannelType: url.PathEscape(channelType),
 		ChannelURL:  url.PathEscape(channelURL),
 	}, templates.SendbirdURLChannelMetadataWithChannelTypeAndChannelURL)
+
 	if err != nil {
-		return nil, err
+		return result, err
 	}
 
 	parsedURL := c.PrepareUrl(pathString)
-	result := make(map[string]string)
 
 	err = c.postAndReturnJSON(parsedURL, r, &result)
 	if err != nil {
