@@ -48,22 +48,22 @@ type SendBotMessageRequest struct {
 	CreateAt     int64    `json:"created_at,omitempty"`
 }
 
-func (c *Client) SendBotMessage(r *SendBotMessageRequest) (TextMessage, error) {
+func (c *Client) SendBotMessage(r *SendBotMessageRequest) (BotMessage, error) {
 	if r.Message == "" {
-		return TextMessage{}, errors.New("send bot message: bot message missing")
+		return BotMessage{}, errors.New("send bot message: bot message missing")
 	}
 
 	if r.BotID == "" {
-		return TextMessage{}, errors.New("send bot message: bot id missing")
+		return BotMessage{}, errors.New("send bot message: bot id missing")
 	}
 
 	if r.ChannelURL == "" {
-		return TextMessage{}, errors.New("send bot message: channel url missing")
+		return BotMessage{}, errors.New("send bot message: channel url missing")
 	}
 
-	result := TextMessage{}
+	result := BotMessage{}
 	if err := c.postAndReturnJSON(c.PrepareUrl(fmt.Sprintf("%s/%s/send", SendbirdURLBots, r.BotID)), r, &result); err != nil {
-		return TextMessage{}, err
+		return BotMessage{}, err
 	}
 
 	return result, nil

@@ -38,3 +38,7 @@ type AdminMessage struct {
 	Message string `json:"message"`
 	Data    string `json:"data"`
 }
+
+type BotMessage struct {
+	Message baseMessage `json:"message"`
+}
