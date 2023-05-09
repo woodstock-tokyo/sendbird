@@ -1,7 +1,7 @@
 package sendbird
 
 type baseMessage struct {
-	MessageID  string `json:"message_id"`
+	MessageID  int64  `json:"message_id"`
 	Type       string `json:"type"`
 	User       User   `json:"user"`
 	CustomType string `json:"custom_type"`
