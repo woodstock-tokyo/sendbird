@@ -40,7 +40,7 @@ func (c *Client) SendTextMessage(r *SendMessageRequest) (TextMessage, error) {
 	}
 
 	result := TextMessage{}
-	if err := c.postAndReturnJSON(c.PrepareUrl(fmt.Sprintf("%s/%s/messages", r.ChannelType, r.ChannelURL)), r, &result); err != nil {
+	if err := c.postAndReturnJSON(c.PrepareUrl(fmt.Sprintf("/%s/%s/messages", r.ChannelType, r.ChannelURL)), r, &result); err != nil {
 		return TextMessage{}, err
 	}
 
