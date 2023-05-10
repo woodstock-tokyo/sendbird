@@ -13,6 +13,7 @@ type baseMessage struct {
 type TextMessage struct {
 	baseMessage
 
+	Text    string `json:"text"`
 	Message string `json:"message"`
 	Data    string `json:"data"`
 	File    File   `json:"file"`
