@@ -48,6 +48,8 @@ type CreateAGroupChannelWithURLRequest struct {
 	Data       string   `json:"data,omitempty"`
 	UserIDs    []string `json:"user_ids,omitempty"`
 	IsDistinct bool     `json:"is_distinct,omitempty"`
+	IsPublic   bool     `json:"is_public,omitempty"`
+	IsSuper    bool     `json:"is_super,omitempty"`
 }
 
 func (c *Client) CreateAGroupChannelWithFile(r *CreateAGroupChannelWithFileRequest) (GroupChannel, error) {
@@ -61,6 +63,8 @@ type CreateAGroupChannelWithFileRequest struct {
 	Data       string   `json:"data,omitempty"`
 	UserIDs    []string `json:"user_ids,omitempty"`
 	IsDistinct bool     `json:"is_distinct,omitempty"`
+	IsPublic   bool     `json:"is_public,omitempty"`
+	IsSuper    bool     `json:"is_super,omitempty"`
 }
 
 func (c *Client) ListGroupChannels(r *ListGroupChannelsRequest) (ListGroupChannelsResponse, error) {
@@ -187,6 +191,8 @@ type UpdateAGroupChannelRequest struct {
 	CustomType string `json:"custom_type,omitempty"`
 	Data       string `json:"data,omitempty"`
 	IsDistinct bool   `json:"is_distinct,omitempty"`
+	IsPublic   bool   `json:"is_public,omitempty"`
+	IsSuper    bool   `json:"is_super,omitempty"`
 }
 
 func (c *Client) ViewAGroupChannel(channelURL string, r *ViewAGroupChannelRequest) (GroupChannel, error) {
