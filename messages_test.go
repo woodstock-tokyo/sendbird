@@ -14,8 +14,8 @@ func TestMessagesActions(t *testing.T) {
 }
 
 func TestGetAMessageActions(t *testing.T) {
-	// textMessage := testSendTextMessage(t, "group_channels", testChannelURL, testUserID, fmt.Sprintf("test from %s", testUserID))
-	testGetAMessage(t, "group_channels", testChannelURL, 9127913152, true)
+	textMessage := testSendTextMessage(t, "group_channels", testChannelURL, testUserID, fmt.Sprintf("test from %s", testUserID))
+	testGetAMessage(t, "group_channels", testChannelURL, textMessage.MessageID, true)
 }
 
 func testSendTextMessage(t *testing.T, channelType string, channelURL string, userID string, message string) TextMessage {

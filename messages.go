@@ -175,7 +175,7 @@ type GetAMessageResp struct {
 	CreatedAt            int64             `json:"created_at"`
 	UpdatedAt            int64             `json:"updated_at"`
 	User                 User              `json:"user"`
-	Translations         string            `json:"translations"`
+	Translations         Translations      `json:"translations"`
 	Data                 string            `json:"data"`
 	OGTag                OGTag             `json:"og_tag"`
 	File                 File              `json:"file"`
