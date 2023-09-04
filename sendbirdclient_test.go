@@ -13,6 +13,7 @@ const (
 	testGCMToken          = "TestGCMToken"
 	testAPNToken          = "TestAPNToken"
 	testChannelURL        = "testChannelURL"
+	testUserID            = "testUserID"
 )
 
 func NewTestClient() *Client {
