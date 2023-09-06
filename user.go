@@ -19,6 +19,7 @@ type User struct {
 	IsActive    bool   `json:"is_active"`
 	IsOnline    bool   `json:"is_online"`
 	LastSeenAt  int64  `json:"last_seen_at"`
+	Role        string `json:"role"`
 }
 
 type usersTemplateData struct {
