@@ -6,7 +6,7 @@ type templateKeysGroupChannels string
 type templateKeysChannelMetadata string
 type templateKeysMessages string
 
-//Nested Template String
+// Nested Template String
 const (
 	SendbirdURLUsersTemplate = `
 	{{define "base"}}/users/{{.UserID}}{{end}}
@@ -17,6 +17,7 @@ const (
 	{{define "mute"}}{{template "base" .}}/mute{{end}}
 	{{define "markReadAll"}}{{template "base" .}}/mark_as_read_all{{end}}
 	{{define "listGroupChannel"}}{{template "base" .}}/my_group_channels{{end}}
+	{{define "getNumberOfChannels"}}{{template "base" .}}/group_channel_count{{end}}
 	{{define "deviceToken"}}{{template "base" .}}/push{{end}}
 	{{define "deviceTokenWithType"}}{{template "deviceToken" .}}/{{.TokenType}}{{end}}
 	{{define "deviceTokenWithTypeAndPushToken"}}{{template "deviceTokenWithType" .}}/{{.PushToken}}{{end}}
@@ -33,6 +34,7 @@ const (
 	{{template "mute"}}
 	{{template "markReadAll"}}
 	{{template "listGroupChannel"}}
+	{{template "getNumberOfChannels"}}
 	{{template "deviceToken"}}
 	{{template "deviceTokenWithType"}}
 	{{template "deviceTokenWithTypeAndPushToken"}}
@@ -107,7 +109,7 @@ const (
 	`
 )
 
-//TemplateKeys
+// TemplateKeys
 const (
 	//Users
 	SendbirdURLUserswithUserID                                    templateKeysUsers = `base`
@@ -118,6 +120,7 @@ const (
 	SendbirdURLUsersMuteWithUserID                                templateKeysUsers = `mute`
 	SendbirdURLUsersMarkReadAllWithUserID                         templateKeysUsers = `markReadAll`
 	SendbirdURLUsersListGroupChannelsWithUserID                   templateKeysUsers = `listGroupChannel`
+	SendbirdURLUsersGetNumberOfChannelsByJoinStatusWithUserID     templateKeysUsers = `getNumberOfChannels`
 	SendbirdURLUsersDeviceTokenWithUserID                         templateKeysUsers = `deviceToken`
 	SendbirdURLUsersDeviceTokenWithUserIDandTokenType             templateKeysUsers = `deviceTokenWithType`
 	SendbirdURLUsersDeviceTokenWithUserIDandTokenTypeandPushToken templateKeysUsers = `deviceTokenWithTypeAndPushToken`
