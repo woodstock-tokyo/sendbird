@@ -282,6 +282,10 @@ func (r *ListMembersInGroupChannelRequest) params() url.Values {
 		q.Set("limit", strconv.Itoa(r.Limit))
 	}
 
+	if r.NickNameStartsWith != "" {
+		q.Set("nickname_startswith", r.NickNameStartsWith)
+	}
+
 	return q
 }
 
