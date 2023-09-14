@@ -285,8 +285,9 @@ func (r *ListMembersInGroupChannelRequest) params() url.Values {
 }
 
 type ListMembersInGroupChannelRequest struct {
-	Token string `json:"token,omitempty"`
-	Limit int    `json:"limit,omitempty"`
+	Token              string `json:"token,omitempty"`
+	Limit              int    `json:"limit,omitempty"`
+	NickNameStartsWith string `json:"nickname_startswith,omitempty"`
 }
 
 type ListMembersInGroupChannelResponse struct {
