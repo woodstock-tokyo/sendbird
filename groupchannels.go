@@ -186,13 +186,14 @@ func (c *Client) UpdateAGroupChannel(channelURL string, r *UpdateAGroupChannelRe
 }
 
 type UpdateAGroupChannelRequest struct {
-	Name       string `json:"name,omitempty"`
-	CoverURL   string `json:"cover_url,omitempty"`
-	CustomType string `json:"custom_type,omitempty"`
-	Data       string `json:"data,omitempty"`
-	IsDistinct bool   `json:"is_distinct,omitempty"`
-	IsPublic   bool   `json:"is_public,omitempty"`
-	IsSuper    bool   `json:"is_super,omitempty"`
+	Name        string   `json:"name,omitempty"`
+	CoverURL    string   `json:"cover_url,omitempty"`
+	CustomType  string   `json:"custom_type,omitempty"`
+	Data        string   `json:"data,omitempty"`
+	IsDistinct  bool     `json:"is_distinct,omitempty"`
+	IsPublic    bool     `json:"is_public,omitempty"`
+	IsSuper     bool     `json:"is_super,omitempty"`
+	OperatorIDs []string `json:"operator_ids,omitempty"`
 }
 
 func (c *Client) ViewAGroupChannel(channelURL string, r *ViewAGroupChannelRequest) (GroupChannel, error) {

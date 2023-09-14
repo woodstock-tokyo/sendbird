@@ -19,6 +19,7 @@ type User struct {
 	IsActive    bool   `json:"is_active"`
 	IsOnline    bool   `json:"is_online"`
 	LastSeenAt  int64  `json:"last_seen_at"`
+	Role        string `json:"role"`
 }
 
 type usersTemplateData struct {
@@ -518,6 +519,60 @@ type ListMyGroupChannelsResponse struct {
 	Channels []GroupChannel `json:"channels"`
 	Next     string         `json:"next"`
 	//commonResponse
+}
+
+func (c *Client) GetNumberOfChannelsByJoinStatusWithUserID(userID string, r *GetNumberOfChannelsByJoinStatusWithUserIDRequest) (GetNumberOfChannelsByJoinStatusWithUserIDResponse, error) {
+	pathString, err := templates.GetUsersTemplate(usersTemplateData{UserID: url.PathEscape(userID)}, templates.SendbirdURLUsersGetNumberOfChannelsByJoinStatusWithUserID)
+	if err != nil {
+		return GetNumberOfChannelsByJoinStatusWithUserIDResponse{}, err
+	}
+
+	parsedURL := c.PrepareUrl(pathString)
+
+	raw := r.params().Encode()
+	//#HACK special case handling for sendbird API
+	raw = strings.Replace(raw, "%2C", ",", -1)
+
+	result := GetNumberOfChannelsByJoinStatusWithUserIDResponse{}
+	err = c.getAndReturnJSON(parsedURL, raw, &result)
+	if err != nil {
+		return GetNumberOfChannelsByJoinStatusWithUserIDResponse{}, err
+	}
+
+	return result, nil
+}
+
+type GetNumberOfChannelsByJoinStatusWithUserIDRequest struct {
+	CustomTypes []string `json:"custom_types,omitempty"`
+	HiddenMode  string   `json:"hidden_mode,omitempty"`
+	State       string   `json:"state,omitempty"`
+	SuperMode   string   `json:"super_mode,omitempty"`
+}
+
+func (r *GetNumberOfChannelsByJoinStatusWithUserIDRequest) params() url.Values {
+	q := make(url.Values)
+
+	if r.CustomTypes != nil && len(r.CustomTypes) > 0 {
+		q.Set("custom_types", strings.Join(r.CustomTypes, ","))
+	}
+
+	if r.HiddenMode != "" {
+		q.Set("hidden_mode", r.HiddenMode)
+	}
+
+	if r.State != "" {
+		q.Set("state", r.State)
+	}
+
+	if r.SuperMode != "" {
+		q.Set("super_mode", r.SuperMode)
+	}
+
+	return q
+}
+
+type GetNumberOfChannelsByJoinStatusWithUserIDResponse struct {
+	GroupChannelCount uint64 `json:"group_channel_count"`
 }
 
 func (c *Client) RegisterADeviceToken(userID string, tokenType string, r *RegisterADeviceTokenRequest) (RegisterADeviceTokenResponse, error) {
