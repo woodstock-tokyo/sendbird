@@ -46,12 +46,12 @@ func TestUserActions(t *testing.T) {
 	//testUnregisterAllDeviceTokens(t, )
 	//testListDeviceTokens(t, "UserTobeTested", "gcm")
 
-	testUpdatePushPerferences(t, TestUserID1)
-	testGetPushPerferences(t, TestUserID1)
-	testResetPushPerferences(t, TestUserID1)
+	testUpdatePushPreferences(t, TestUserID1)
+	testGetPushPreferences(t, TestUserID1)
+	testResetPushPreferences(t, TestUserID1)
 
-	//testUpdateChannelPushPerferences(t, "UserTobeTested", testChannelURL)
-	//testGetChannelPushPerferences(t, "UserTobeTested", testChannelURL)
+	//testUpdateChannelPushPreferences(t, "UserTobeTested", testChannelURL)
+	//testGetChannelPushPreferences(t, "UserTobeTested", testChannelURL)
 
 	testDeleteAUser(t, TestUserID1)
 	testDeleteAUser(t, TestUserID2)
@@ -240,55 +240,55 @@ func testListMyGroupChannels(t *testing.T, userID string) {
 // 	t.Logf("testListDeviceTokens() Result: %+v", result)
 // }
 
-func testUpdatePushPerferences(t *testing.T, userID string) {
-	r := &UpdatePushPerferencesRequest{}
+func testUpdatePushPreferences(t *testing.T, userID string) {
+	r := &UpdatePushPreferencesRequest{}
 
-	result, err := testUserClient.UpdatePushPerferences(userID, r)
+	result, err := testUserClient.UpdatePushPreferences(userID, r)
 	if err != nil {
-		t.Errorf("Fail in testUpdatePushPerferences(): %+v", err)
+		t.Errorf("Fail in testUpdatePushPreferences(): %+v", err)
 	}
 
-	t.Logf("testUpdatePushPerferences() Result: %+v", result)
+	t.Logf("testUpdatePushPreferences() Result: %+v", result)
 }
 
-func testGetPushPerferences(t *testing.T, userID string) {
-	result, err := testUserClient.GetPushPerferences(userID)
+func testGetPushPreferences(t *testing.T, userID string) {
+	result, err := testUserClient.GetPushPreferences(userID)
 	if err != nil {
-		t.Errorf("Fail in testGetPushPerferences(): %+v", err)
+		t.Errorf("Fail in testGetPushPreferences(): %+v", err)
 	}
 
-	t.Logf("testGetPushPerferences() Result: %+v", result)
+	t.Logf("testGetPushPreferences() Result: %+v", result)
 }
 
-func testResetPushPerferences(t *testing.T, userID string) {
-	result, err := testUserClient.ResetPushPerferences(userID)
+func testResetPushPreferences(t *testing.T, userID string) {
+	result, err := testUserClient.ResetPushPreferences(userID)
 	if err != nil {
-		t.Errorf("Fail in testResetPushPerferences(): %+v", err)
+		t.Errorf("Fail in testResetPushPreferences(): %+v", err)
 	}
 
-	t.Logf("testResetPushPerferences() Result: %+v", result)
+	t.Logf("testResetPushPreferences() Result: %+v", result)
 }
 
-// func testUpdateChannelPushPerferences(t *testing.T, userID string, channelURL string) {
-// 	r := &UpdateChannelPushPerferencesRequest{
+// func testUpdateChannelPushPreferences(t *testing.T, userID string, channelURL string) {
+// 	r := &UpdateChannelPushPreferencesRequest{
 // 		Enable: true,
 // 	}
 
-// 	result, err := testUserClient.UpdateChannelPushPerferences(userID, channelURL, r)
+// 	result, err := testUserClient.UpdateChannelPushPreferences(userID, channelURL, r)
 // 	if err != nil {
-// 		t.Errorf("Fail in testUpdateChannelPushPerferences(): %+v", err)
+// 		t.Errorf("Fail in testUpdateChannelPushPreferences(): %+v", err)
 // 	}
 
-// 	t.Logf("testUpdateChannelPushPerferences() Result: %+v", result)
+// 	t.Logf("testUpdateChannelPushPreferences() Result: %+v", result)
 
 // }
 
-// func testGetChannelPushPerferences(t *testing.T, userID string, channelURL string) {
-// 	result, err := testUserClient.GetChannelPushPerferences(userID, channelURL)
+// func testGetChannelPushPreferences(t *testing.T, userID string, channelURL string) {
+// 	result, err := testUserClient.GetChannelPushPreferences(userID, channelURL)
 // 	if err != nil {
-// 		t.Errorf("Fail in testGetChannelPushPerferences(): %+v", err)
+// 		t.Errorf("Fail in testGetChannelPushPreferences(): %+v", err)
 // 	}
 
-// 	t.Logf("testGetChannelPushPerferences() Result: %+v", result)
+// 	t.Logf("testGetChannelPushPreferences() Result: %+v", result)
 
 // }

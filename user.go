@@ -674,23 +674,23 @@ type ListDeviceTokensResponse struct {
 	User   User     `json:"user"`
 }
 
-func (c *Client) UpdatePushPerferences(userID string, r *UpdatePushPerferencesRequest) (UpdatePushPerferencesResponse, error) {
+func (c *Client) UpdatePushPreferences(userID string, r *UpdatePushPreferencesRequest) (UpdatePushPreferencesResponse, error) {
 	pathString, err := templates.GetUsersTemplate(usersTemplateData{UserID: url.PathEscape(userID)}, templates.SendbirdURLUsersPushPreferenceWithUserID)
 	if err != nil {
-		return UpdatePushPerferencesResponse{}, err
+		return UpdatePushPreferencesResponse{}, err
 	}
 
 	parsedURL := c.PrepareUrl(pathString)
-	result := UpdatePushPerferencesResponse{}
+	result := UpdatePushPreferencesResponse{}
 
 	if err := c.putAndReturnJSON(parsedURL, r, &result); err != nil {
-		return UpdatePushPerferencesResponse{}, err
+		return UpdatePushPreferencesResponse{}, err
 	}
 
 	return result, nil
 }
 
-type UpdatePushPerferencesRequest struct {
+type UpdatePushPreferencesRequest struct {
 	DoNotDisturb bool   `json:"do_not_disturb,omitempty"`
 	StartHour    int    `json:"start_hour,omitempty"`
 	StartMin     int    `json:"start_min,omitempty"`
@@ -699,7 +699,7 @@ type UpdatePushPerferencesRequest struct {
 	TimeZone     string `json:"timezone,omitempty"`
 }
 
-type UpdatePushPerferencesResponse struct {
+type UpdatePushPreferencesResponse struct {
 	DoNotDisturb bool   `json:"do_not_disturb,omitempty"`
 	StartHour    int    `json:"start_hour,omitempty"`
 	StartMin     int    `json:"start_min,omitempty"`
@@ -709,24 +709,24 @@ type UpdatePushPerferencesResponse struct {
 	//commonResponse
 }
 
-func (c *Client) GetPushPerferences(userID string) (GetPushPerferencesResponse, error) {
+func (c *Client) GetPushPreferences(userID string) (GetPushPreferencesResponse, error) {
 	pathString, err := templates.GetUsersTemplate(usersTemplateData{UserID: url.PathEscape(userID)}, templates.SendbirdURLUsersPushPreferenceWithUserID)
 	if err != nil {
-		return GetPushPerferencesResponse{}, err
+		return GetPushPreferencesResponse{}, err
 	}
 
 	parsedURL := c.PrepareUrl(pathString)
-	result := GetPushPerferencesResponse{}
+	result := GetPushPreferencesResponse{}
 
 	err = c.getAndReturnJSON(parsedURL, "", &result)
 	if err != nil {
-		return GetPushPerferencesResponse{}, err
+		return GetPushPreferencesResponse{}, err
 	}
 
 	return result, nil
 }
 
-type GetPushPerferencesResponse struct {
+type GetPushPreferencesResponse struct {
 	DoNotDisturb bool   `json:"do_not_disturb,omitempty"`
 	StartHour    int    `json:"start_hour,omitempty"`
 	StartMin     int    `json:"start_min,omitempty"`
@@ -735,7 +735,7 @@ type GetPushPerferencesResponse struct {
 	TimeZone     string `json:"timezone,omitempty"`
 }
 
-func (c *Client) ResetPushPerferences(userID string) (sendbirdErrorResponse, error) {
+func (c *Client) ResetPushPreferences(userID string) (sendbirdErrorResponse, error) {
 	pathString, err := templates.GetUsersTemplate(usersTemplateData{UserID: url.PathEscape(userID)}, templates.SendbirdURLUsersPushPreferenceWithUserID)
 	if err != nil {
 		return sendbirdErrorResponse{}, err
@@ -752,53 +752,53 @@ func (c *Client) ResetPushPerferences(userID string) (sendbirdErrorResponse, err
 	return result, nil
 }
 
-func (c *Client) UpdateChannelPushPerferences(userID string, channelURL string, r *UpdateChannelPushPerferencesRequest) (UpdateChannelPushPerferencesResponse, error) {
+func (c *Client) UpdateChannelPushPreferences(userID string, channelURL string, r *UpdateChannelPushPreferencesRequest) (UpdateChannelPushPreferencesResponse, error) {
 	pathString, err := templates.GetUsersTemplate(usersTemplateData{
 		UserID:     url.PathEscape(userID),
 		ChannelURL: url.PathEscape(channelURL),
 	}, templates.SendbirdURLUsersPushPreferenceWithUserIDandChannelURL)
 	if err != nil {
-		return UpdateChannelPushPerferencesResponse{}, err
+		return UpdateChannelPushPreferencesResponse{}, err
 	}
 
 	parsedURL := c.PrepareUrl(pathString)
-	result := UpdateChannelPushPerferencesResponse{}
+	result := UpdateChannelPushPreferencesResponse{}
 
 	if err := c.putAndReturnJSON(parsedURL, r, &result); err != nil {
-		return UpdateChannelPushPerferencesResponse{}, err
+		return UpdateChannelPushPreferencesResponse{}, err
 	}
 
 	return result, nil
 }
 
-type UpdateChannelPushPerferencesRequest struct {
+type UpdateChannelPushPreferencesRequest struct {
 	Enable bool `json:"enable"`
 }
 
-type UpdateChannelPushPerferencesResponse struct {
+type UpdateChannelPushPreferencesResponse struct {
 	Enable bool `json:"enable"`
 }
 
-func (c *Client) GetChannelPushPerferences(userID string, channelURL string) (GetChannelPushPerferencesResponse, error) {
+func (c *Client) GetChannelPushPreferences(userID string, channelURL string) (GetChannelPushPreferencesResponse, error) {
 	pathString, err := templates.GetUsersTemplate(usersTemplateData{
 		UserID:     url.PathEscape(userID),
 		ChannelURL: url.PathEscape(channelURL),
 	}, templates.SendbirdURLUsersPushPreferenceWithUserIDandChannelURL)
 	if err != nil {
-		return GetChannelPushPerferencesResponse{}, err
+		return GetChannelPushPreferencesResponse{}, err
 	}
 
 	parsedURL := c.PrepareUrl(pathString)
-	result := GetChannelPushPerferencesResponse{}
+	result := GetChannelPushPreferencesResponse{}
 
 	err = c.getAndReturnJSON(parsedURL, "", &result)
 	if err != nil {
-		return GetChannelPushPerferencesResponse{}, err
+		return GetChannelPushPreferencesResponse{}, err
 	}
 
 	return result, nil
 }
 
-type GetChannelPushPerferencesResponse struct {
+type GetChannelPushPreferencesResponse struct {
 	Enable bool `json:"enable"`
 }
