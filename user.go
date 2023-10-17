@@ -691,21 +691,23 @@ func (c *Client) UpdatePushPreferences(userID string, r *UpdatePushPreferencesRe
 }
 
 type UpdatePushPreferencesRequest struct {
-	DoNotDisturb bool   `json:"do_not_disturb,omitempty"`
-	StartHour    int    `json:"start_hour,omitempty"`
-	StartMin     int    `json:"start_min,omitempty"`
-	EndHour      int    `json:"end_hour,omitempty"`
-	EndMin       int    `json:"end_min,omitempty"`
-	TimeZone     string `json:"timezone,omitempty"`
+	PushtriggerOption PushtriggerOption `json:"push_trigger_option,omitempty"`
+	DoNotDisturb      bool              `json:"do_not_disturb,omitempty"`
+	StartHour         int               `json:"start_hour,omitempty"`
+	StartMin          int               `json:"start_min,omitempty"`
+	EndHour           int               `json:"end_hour,omitempty"`
+	EndMin            int               `json:"end_min,omitempty"`
+	TimeZone          string            `json:"timezone,omitempty"`
 }
 
 type UpdatePushPreferencesResponse struct {
-	DoNotDisturb bool   `json:"do_not_disturb,omitempty"`
-	StartHour    int    `json:"start_hour,omitempty"`
-	StartMin     int    `json:"start_min,omitempty"`
-	EndHour      int    `json:"end_hour,omitempty"`
-	EndMin       int    `json:"end_min,omitempty"`
-	TimeZone     string `json:"timezone,omitempty"`
+	PushtriggerOption PushtriggerOption `json:"push_trigger_option,omitempty"`
+	DoNotDisturb      bool              `json:"do_not_disturb,omitempty"`
+	StartHour         int               `json:"start_hour,omitempty"`
+	StartMin          int               `json:"start_min,omitempty"`
+	EndHour           int               `json:"end_hour,omitempty"`
+	EndMin            int               `json:"end_min,omitempty"`
+	TimeZone          string            `json:"timezone,omitempty"`
 	//commonResponse
 }
 
@@ -727,12 +729,13 @@ func (c *Client) GetPushPreferences(userID string) (GetPushPreferencesResponse, 
 }
 
 type GetPushPreferencesResponse struct {
-	DoNotDisturb bool   `json:"do_not_disturb,omitempty"`
-	StartHour    int    `json:"start_hour,omitempty"`
-	StartMin     int    `json:"start_min,omitempty"`
-	EndHour      int    `json:"end_hour,omitempty"`
-	EndMin       int    `json:"end_min,omitempty"`
-	TimeZone     string `json:"timezone,omitempty"`
+	PushtriggerOption PushtriggerOption `json:"push_trigger_option,omitempty"`
+	DoNotDisturb      bool              `json:"do_not_disturb,omitempty"`
+	StartHour         int               `json:"start_hour,omitempty"`
+	StartMin          int               `json:"start_min,omitempty"`
+	EndHour           int               `json:"end_hour,omitempty"`
+	EndMin            int               `json:"end_min,omitempty"`
+	TimeZone          string            `json:"timezone,omitempty"`
 }
 
 func (c *Client) ResetPushPreferences(userID string) (sendbirdErrorResponse, error) {
@@ -772,11 +775,11 @@ func (c *Client) UpdateChannelPushPreferences(userID string, channelURL string, 
 }
 
 type UpdateChannelPushPreferencesRequest struct {
-	Enable bool `json:"enable"`
+	PushtriggerOption PushtriggerOption `json:"push_trigger_option,omitempty"`
 }
 
 type UpdateChannelPushPreferencesResponse struct {
-	Enable bool `json:"enable"`
+	PushtriggerOption PushtriggerOption `json:"push_trigger_option,omitempty"`
 }
 
 func (c *Client) GetChannelPushPreferences(userID string, channelURL string) (GetChannelPushPreferencesResponse, error) {
@@ -800,5 +803,14 @@ func (c *Client) GetChannelPushPreferences(userID string, channelURL string) (Ge
 }
 
 type GetChannelPushPreferencesResponse struct {
-	Enable bool `json:"enable"`
+	PushtriggerOption PushtriggerOption `json:"push_trigger_option,omitempty"`
 }
+
+type PushtriggerOption string
+
+const (
+	PushtriggerOptionDefault     PushtriggerOption = "default"
+	PushtriggerOptionAll         PushtriggerOption = "all"
+	PushtriggerOptionMentionOnly PushtriggerOption = "mention_only"
+	PushtriggerOptionOff         PushtriggerOption = "off"
+)
